@@ -8,24 +8,33 @@ public class islands {
 	public static int islandsCount = 0;
 
 	islands(char[][] input, int[] size) {
-
+		islandsCount = 0;
 		DisjointSets body = new DisjointSets(size[0] * size[1]);
 		for (int i = 0; i < size[0]; i++) {
-			for (int j = 0; j < size[0]; j++) {
-				if (input[i][j+1] == input[i][j]){
-					body.union(body.find(i*j),body.find( i*(j+1)));
+			for (int j = 0; j < size[1]; j++) {
+				if (j < size[1] - 1) {
+					if (input[i][j + 1] == input[i][j] && input[i][j] == '-') {
+						body.union(body.find(i * size[1] + j), body.find(i * size[1] + j + 1));
+					}
 				}
-				
-				if (input[i+1][j] == input[i][j]){
-					body.union(body.find((i+1)*j), body.find(i*(j)));
+				if (i < size[0] - 1) {
+					if (input[i + 1][j] == input[i][j] && input[i][j] == '-') {
+						body.union(body.find((i + 1) * size[1] + j), body.find(i * size[1] + j));
+					}
 				}
 			}
 		}
+		System.out.println(" A7A");
+		/*
+		 * for (int i = 0; i < size[0]-1; i++) { for (int j = 0; j < size[1]-1;
+		 * j++) {
+		 * 
+		 * if ((body.find(input[i][j]) != body.find(input[i][j + 1]) ||
+		 * body.find(input[i][j]) != body.find(input[i + 1][j]))&& input[i][j]
+		 * == '-') { islandsCount++; } } }
+		 */
 	}
 
-
-		
-	
 	public int getIslands() {
 		return islandsCount;
 	}
@@ -35,22 +44,21 @@ public class islands {
 		String file = args[0];
 		try {
 			Scanner input = new Scanner(new File(file));
-			
+
 			int numberOfProblems = Integer.parseInt(input.nextLine());
 
 			String[] sizes = input.nextLine().split("\\s");
 			int[] problemSizes = new int[numberOfProblems];
-			for (int i = 0; i < numberOfProblems; i++) {
-				problemSizes[i] = Integer.parseInt(sizes[0]);
+			for (int i = 0; i < sizes.length; i++) {
+				problemSizes[i] = Integer.parseInt(sizes[i]);
 			}
-			 
+
 			String destination = file.replaceFirst(".txt", "_solution.txt");
 			PrintWriter writer;
 			try {
 				writer = new PrintWriter(new FileWriter(destination));
 
 				while (input.hasNext()) {
-	
 
 					char[][] inputland = new char[problemSizes[0]][problemSizes[1]];
 					for (int i = 0; i < problemSizes[0]; i++) {
@@ -62,6 +70,9 @@ public class islands {
 						inputland[i] = row;
 					}
 					islands problem = new islands(inputland, problemSizes);
+					String output = "" + problem.getIslands();
+					System.out.print(output);
+					writer.print(output);
 
 				}
 				writer.close();
