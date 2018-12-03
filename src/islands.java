@@ -24,15 +24,19 @@ public class islands {
 				}
 			}
 		}
-		System.out.println(" A7A");
-		/*
-		 * for (int i = 0; i < size[0]-1; i++) { for (int j = 0; j < size[1]-1;
-		 * j++) {
-		 * 
-		 * if ((body.find(input[i][j]) != body.find(input[i][j + 1]) ||
-		 * body.find(input[i][j]) != body.find(input[i + 1][j]))&& input[i][j]
-		 * == '-') { islandsCount++; } } }
-		 */
+
+		ArrayList<Integer> distinct = new ArrayList<Integer>();
+		;
+
+		for (int i = 0; i < input.length; i++) {
+			for (int j = 0; j < input[i].length; j++) {
+				int d = i * input[0].length + j;
+				if (input[i][j] == '-' && !(distinct.contains(body.find(d)))) {
+					distinct.add(body.find(d));
+				}
+			}
+		}
+		islandsCount = distinct.size();
 	}
 
 	public int getIslands() {
@@ -47,18 +51,18 @@ public class islands {
 
 			int numberOfProblems = Integer.parseInt(input.nextLine());
 
-			String[] sizes = input.nextLine().split("\\s");
-			int[] problemSizes = new int[numberOfProblems];
-			for (int i = 0; i < sizes.length; i++) {
-				problemSizes[i] = Integer.parseInt(sizes[i]);
-			}
-
 			String destination = file.replaceFirst(".txt", "_solution.txt");
 			PrintWriter writer;
 			try {
 				writer = new PrintWriter(new FileWriter(destination));
 
 				while (input.hasNext()) {
+
+					String[] sizes = input.nextLine().split("\\s");
+					int[] problemSizes = new int[numberOfProblems];
+					for (int i = 0; i < sizes.length; i++) {
+						problemSizes[i] = Integer.parseInt(sizes[i]);
+					}
 
 					char[][] inputland = new char[problemSizes[0]][problemSizes[1]];
 					for (int i = 0; i < problemSizes[0]; i++) {
@@ -71,7 +75,7 @@ public class islands {
 					}
 					islands problem = new islands(inputland, problemSizes);
 					String output = "" + problem.getIslands();
-					System.out.print(output);
+					System.out.print(output + "\n");
 					writer.print(output);
 
 				}
