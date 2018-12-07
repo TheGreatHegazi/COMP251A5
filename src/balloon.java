@@ -43,11 +43,8 @@ public static int arrowCount = 0;
 		try {
 			Scanner input = new Scanner(new File(file));
 
-			// first line tells how many balloon problems there are
 			int numberOfProblems = Integer.parseInt(input.nextLine());
 
-			// second line tells us how many balloons there are for each problem
-			// not really used, just to get us through the second line
 			String[] sizes = input.nextLine().split("\\s");
 			int[] problemSizes = new int[numberOfProblems];
 			for (int i = 0; i < numberOfProblems; i++) {
@@ -59,7 +56,6 @@ public static int arrowCount = 0;
 			try {
 				writer = new PrintWriter(new FileWriter(destination));
 
-				// rest of the lines have the balloon heights for every problem
 				while (input.hasNext()) {
 					String[] heights = input.nextLine().split("\\s");
 					int[] inputHeights = new int[heights.length];
