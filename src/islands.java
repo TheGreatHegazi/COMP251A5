@@ -45,7 +45,7 @@ public class islands {
 
 	public static void main(String[] args) {
 		long startTime = System.currentTimeMillis();
-		String file = args[0];
+		String file = "testIslands.txt";
 		try {
 			Scanner input = new Scanner(new File(file));
 

@@ -39,7 +39,7 @@ public static int arrowCount = 0;
 
 	public static void main(String[] args) {
 		long startTime = System.currentTimeMillis(); // to see runtime
-		String file = args[0];
+		String file = "testBalloons.java";
 		try {
 			Scanner input = new Scanner(new File(file));
 

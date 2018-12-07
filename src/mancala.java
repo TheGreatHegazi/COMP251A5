@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -123,7 +120,7 @@ public class mancala {
 	public static void main(String[] args) {
 
 		long startTime = System.currentTimeMillis();
-		String file = args[0];
+		String file = "testMancala.txt";
 		try {
 			Scanner input = new Scanner(new File(file));
 
